@@ -1,7 +1,7 @@
 import turtle
 import random
+turtle.bgcolor("green")
 turtle.tracer(1,0)
-
 SIZE_X=800
 SIZE_Y=500
 turtle.setup(SIZE_X,SIZE_Y)
@@ -14,6 +14,9 @@ food_pos=[]
 food_stamp=[]
 snake=turtle.clone()
 snake.shape("turtle")
+snake.color('pink')
+
+
 turtle.hideturtle()
 
 for i in range(START_LENGTH):
@@ -74,10 +77,12 @@ turtle.listen()
 def make_food():
     min_x=-int(SIZE_X/2/SQUARE_SIZE)+1
     max_x=int(SIZE_X/2/SQUARE_SIZE)-1
-    min_y=-int(SIZE_Y/2/SQUARE_SIZE)-1
-    max_y=int(SIZE_Y/2/SQUARE_SIZE)+1
+    min_y=-int(SIZE_Y/2/SQUARE_SIZE)+1
+    max_y=int(SIZE_Y/2/SQUARE_SIZE)-1
+    
     food_x=random.randint(min_x,max_x)*SQUARE_SIZE
     food_y=random.randint(min_y,max_y)*SQUARE_SIZE
+    
     food.goto(food_x,food_y)
     new_tuople=(food_x,food_y)
     food_pos.append(new_tuople)
@@ -150,9 +155,9 @@ def move_snake():
     turtle.ontimer(move_snake,TIME_STEP)
 
 move_snake()
-turtle.register_shape("trash.gif")
+turtle.register_shape("cinny.gif")
 food=turtle.clone()
-food.shape("trash.gif")
+food.shape("cinny.gif")
 
 food_pos=[(100,100)]
 food_stamp=[]
