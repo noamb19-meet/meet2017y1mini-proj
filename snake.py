@@ -7,13 +7,13 @@ SIZE_Y=500
 turtle.setup(SIZE_X,SIZE_Y)
 turtle.penup()
 SQUARE_SIZE=20
-START_LENGTH=3
+START_LENGTH=4
 pos_list=[]
 stamp_list=[]
 food_pos=[]
 food_stamp=[]
 snake=turtle.clone()
-snake.shape("square")
+snake.shape("turtle")
 turtle.hideturtle()
 
 for i in range(START_LENGTH):
@@ -25,6 +25,7 @@ for i in range(START_LENGTH):
     pos_list.append(my_pos)
     stamp_ID=snake.stamp()
     stamp_list.append(stamp_ID)
+   
     
 UP_ARROW="Up"
 LEFT_ARROW="Left"
@@ -116,42 +117,52 @@ def move_snake():
     elif new_y_pos>=UP_EDGE:
         print("tou hit the up edge!Game over!")
         quit()
-    turtle.ontimer(move_snake,TIME_STEP)
-    global food_stamps, food_pos
-    if snake .pos() in food_pos:
-        food_ind=food_pos.index(snake.pos())
-        food.clearstamp(food_stamp[food_ind])
 
-        food_pos.pop(food_ind)
-        food_stamp.pop(food_ind)
-        print("you have eaten the food!")
-        make_food()
-
-    
-    
-    
+# make head 
     my_pos=snake.pos()
     pos_list.append(my_pos)
     new_stamp=snake.stamp()
     stamp_list.append(new_stamp)
-    old_stamp=stamp_list.pop(0)
-    snake.clearstamp(old_stamp)
-    pos_list.pop(0)
+    global food_stamps, food_pos
+    if snake .pos() in food_pos:
+        food_ind=food_pos.index(snake.pos())
+        food.clearstamp(food_stamp[food_ind])
+        my_pos=snake.pos()    
+    
+        food_pos.pop(food_ind)
+        food_stamp.pop(food_ind)
+        print("you have eaten the food!")
+        make_food()
+   
+
+
+    
+    
+    else:
+        old_stamp=stamp_list.pop(0)
+        snake.clearstamp(old_stamp)
+        pos_list.pop(0)
+       
+    
+    if snake.pos() in pos_list[0:-1]:
+        print("game over!")
+        quit()   
+    turtle.ontimer(move_snake,TIME_STEP)
+
 move_snake()
 turtle.register_shape("trash.gif")
 food=turtle.clone()
 food.shape("trash.gif")
 
-food_pos=[(100,100), (-100,100), (-100,-100), (100,-100)]
+food_pos=[(100,100)]
 food_stamp=[]
         
 for this_food_pos in food_pos:
-##    food.goto(this_food_pos)[0](this_food_pos)[1](this_food_pos)[2](this_food_pos)[3]\
     food.goto(this_food_pos[0], this_food_pos[1])
     new_stamp=food.stamp()
     food_stamp.append(new_stamp)
 
- 
+
 
     
         
